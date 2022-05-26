@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { ParmaTableService } from './../parma-table.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,26 +7,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./testing.component.css'],
 })
 export class TestingComponent implements OnInit {
-  constructor(private http: HttpClient) {}
+  constructor(private parmatable: ParmaTableService) {}
 
   ddl00: string[] = [];
-  ddl00value: string="";
+  ddl00value: string = '';
+
+  ddl01: string[] = [];
+  ddl01value: string = '';
+
+  showMessage: string = 'Good!';
 
   ngOnInit(): void {
-    this.http
-      .get<string[]>(
-        'https://shibe.online/api/shibes?count=5&urls=true&httpsUrls=true'
-      )
-      .subscribe({
-        next: (result) => {
-          this.ddl00 = result;
+    this.parmatable.LoadParam('5').subscribe({
+      next: (result) => {
+        this.ddl01 = result;
+        this.ddl01value = result[3];
+      },
+      error: () => {
+        this.ddl01 = [];
+      },
+    });
+  }
 
-          this.ddl00value = result[3];
-
-        },
-        error: () => {
-          this.ddl00 = [];
-        },
-      });
+  ddlonchange(skey: string) {
+    console.log('change:' + skey);
+    this.showMessage = 'change:' + skey;
+    this.parmatable.LoadParam(skey).subscribe({
+      next: (result) => {
+        this.ddl00 = result;
+        // this.ddl00value = result[3];
+      },
+      error: () => {
+        this.ddl00 = [];
+      },
+    });
   }
 }

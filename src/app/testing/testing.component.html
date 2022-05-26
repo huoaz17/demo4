@@ -8,3 +8,18 @@
 </option>
 </select>
 
+<br>
+<br>
+<hr/>
+<select #mySelect (change)='ddlonchange(mySelect.selectedIndex.toString())' >
+  <option #tddl01
+  *ngFor="let item of ddl01; let i=index"
+  id="{{i}}"
+  [value]="item"
+  [selected]="(ddl01value === tddl01.value)"
+  >
+  {{item}}
+</option>
+</select>
+
+<pre>{{showMessage}}</pre>

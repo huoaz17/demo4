@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SParamTableService } from './s-param-table.service';
+import { ParmaTableService } from './parma-table.service';
 
-describe('SParamTableService', () => {
-  let service: SParamTableService;
+describe('ParmaTableService', () => {
+  let service: ParmaTableService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SParamTableService);
+    service = TestBed.inject(ParmaTableService);
   });
 
   it('should be created', () => {
