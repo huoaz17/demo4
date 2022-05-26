@@ -18,20 +18,23 @@ export class TestingComponent implements OnInit {
   showMessage: string = 'Good!';
 
   ngOnInit(): void {
-    this.parmatable.LoadParam('5').subscribe({
-      next: (result) => {
-        this.ddl01 = result;
-        this.ddl01value = result[3];
-      },
-      error: () => {
-        this.ddl01 = [];
-      },
-    });
+    if (this.ddl01.length == 0) {
+      this.parmatable.LoadParam('5').subscribe({
+        next: (result) => {
+          this.ddl01 = result;
+          this.ddl01value = result[3];
+        },
+        error: () => {
+          this.ddl01 = [];
+        },
+      });
+    }
   }
 
   ddlonchange(skey: string) {
     console.log('change:' + skey);
     this.showMessage = 'change:' + skey;
+
     this.parmatable.LoadParam(skey).subscribe({
       next: (result) => {
         this.ddl00 = result;

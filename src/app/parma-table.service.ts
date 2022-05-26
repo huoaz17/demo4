@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class ParmaTableService {
 
   httpparams3 = new HttpParams()
-    .set('count', '5')
+    .set('count', 5)
     .set('urls', true)
     .set('httpsUrls', true);
 
@@ -15,7 +15,16 @@ export class ParmaTableService {
 
   LoadParam(strkey: string)
   {
-    this.httpparams3.set('count', strkey);
+    console.log('LoadParam:'+strkey);
+    console.log(this.httpparams3);
+
+    this.httpparams3 = new HttpParams()
+    .set('count', strkey)
+    .set('urls', true)
+    .set('httpsUrls', true);
+
+    console.log(this.httpparams3);
+
     return this.http
       .get<string[]>(
         'https://shibe.online/api/shibes',
